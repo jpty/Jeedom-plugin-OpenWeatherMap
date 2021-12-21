@@ -1,0 +1,1 @@
+# Jeedom-plugin-OpenWeatherMap
