@@ -1,0 +1,55 @@
+<div style="position:relative" id="rainForecastContainer-#id#"></div>
+<script>
+    Highcharts.chart('rainForecastContainer-#id#', {
+    chart: { type: 'column', height: '100px', },
+    credits: { enabled: false },
+    legend: { enabled: false },
+    title: {
+      text: '#txtRain#',
+      style: { 'font': 'Roboto', 'fontSize': '1em', 'color': 'var(--txt-color) !important;'},
+      y: #yTxtRain#,
+      verticalAlign: top,
+      floating: true
+    },
+    exporting : { enabled: false },
+    xAxis: {
+      categories: [#tsArray#],
+      labels: { step: 2 },
+      tickInterval: 5, tickWidth: 1, tickLength: 5,
+      minorTicks: true,
+      minorTickInterval: 1,
+      crosshair: true
+    },
+    yAxis: {
+      min: 0,
+      // max: 2,
+      linewidth: 1,
+      title: {
+        text: 'mm/h',
+        style: { 'font': 'Roboto', 'fontSize': '0.8em'},
+        x: -10,
+        margin: 0
+      },
+      labels: {
+        enabled: true,
+        padding: 2,
+        align: 'right',
+        x: -2
+      }
+    },
+    tooltip: {
+      backgroundColor: '#5078AA',
+      pointFormat: '{point.key} {point.y:.1f} mm/h',
+      style: { 'font': 'Roboto', 'color': 'white' },
+      useHTML: true
+    },
+    plotOptions: {
+      column: { pointPadding: 0.2, borderWidth: 0 }
+    },
+    series: [{
+      name: '',
+      xAxis: 0,
+      data: [#precipArray#]
+    }]
+    });
+</script>

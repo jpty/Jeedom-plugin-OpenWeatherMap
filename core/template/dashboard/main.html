@@ -1,0 +1,92 @@
+<div class="eqLogic eqLogic-widget allowResize #custom_layout# #eqLogic_class# #class#" data-eqType="#eqType#" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="#version#" data-translate-category="#translate_category#" data-category="#category#" data-tags="#tags#" style="width: #width#;height: #height#;#style#">
+	<center class="widget-name">
+		<span class="warning" title="#alert_name#">
+			<i class='#alert_icon#'></i>
+		</span>
+		<span class="cmd pull-right cursor">
+      <a target="_blank" href="#url_openweathermap#" title="Voir sur OpenWeatherMap"><span style="font-size: 0.8em">#location# </span><i class='fas fa-info-circle' style="margin-top: 3px;"></i></a>
+		</span>&nbsp;
+		<span class="cmd refresh pull-right cursor" data-cmd_id="#refresh_id#">
+			<i class="fas fa-sync"></i>
+		</span>
+		<span class="reportModeVisible">#name_display# <span class="object_name">#object_name#</span></span>
+		<a href="#eqLink#" class="reportModeHidden">#name_display# <span class="object_name">#object_name#</span></a>
+	</center>
+  <div style="position : relative; left : 0px; height: 100px">
+    <span class="pull-left">
+      #icone#
+      <!--
+        <div title="#condition# #condition_id#" style="background: url('#icone#') no-repeat center; background-size: 100% 100%; width: 100px; height: 100px;"></div> pour images
+        <div title="#condition# #condition_id#" style="text-align:center;margin-top:15px;"><i class="wi #wiIcon#" style="font-size: 48px;width: 100px; height: 80px;"></i></div> pour weather icones
+      -->
+    </span>
+    <span class="pull-right" style="margin-top: 4px; width: 80px">
+      <div style="width: 30px" title="Vent #winddir# #wind_direction#°">
+  <svg data-v-47880d39="" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve" class="icon-wind-direction" style="transform: rotate(#wind_direction_vari#deg);"><g data-v-47880d39="" fill="#3C73A5"><path data-v-47880d39="" d="M510.5,749.6c-14.9-9.9-38.1-9.9-53.1,1.7l-262,207.3c-14.9,11.6-21.6,6.6-14.9-11.6L474,48.1c5-16.6,14.9-18.2,21.6,0l325,898.7c6.6,16.6-1.7,23.2-14.9,11.6L510.5,749.6z"></path><path data-v-47880d39="" d="M817.2,990c-8.3,0-16.6-3.3-26.5-9.9L497.2,769.5c-5-3.3-18.2-3.3-23.2,0L210.3,976.7c-19.9,16.6-41.5,14.9-51.4,0c-6.6-9.9-8.3-21.6-3.3-38.1L449.1,39.8C459,13.3,477.3,10,483.9,10c6.6,0,24.9,3.3,34.8,29.8l325,898.7c5,14.9,5,28.2-1.7,38.1C837.1,985,827.2,990,817.2,990z M485.6,716.4c14.9,0,28.2,5,39.8,11.6l255.4,182.4L485.6,92.9l-267,814.2l223.9-177.4C454.1,721.4,469,716.4,485.6,716.4z"></path></g></svg>
+      </div>
+      <span style="font-size: 0.8em;line-height: 6px!important" class="cmd noRefresh" data-type="info" data-subtype="string" data-cmd_id="#windid#">#windspeed#km/h<br/></span>
+      <span style="font-size: 0.8em;line-height: 6px!important;background: #ed1c24;color: #ffffff!important" title="Rafales">#windGust#</span>
+    </span>
+    <span class="verticalAlign">
+      <div class="pull-left" style="margin-top: 0px;">
+        <span style="margin-left: 4px;font-size: 0.8em;" class="cmd noRefresh" data-type="info" data-subtype="string" data-cmd_id="#conditionid#">#condition#</span>
+        <span style="margin-left: 4px;font-size: 0.8em;" class="cmd noRefresh" data-type="info" data-subtype="string" data-cmd_id="#cloudsid#" title="Nuages">#clouds#</span>
+        <span style="margin-left: 4px;font-size: 0.8em;" class="cmd noRefresh" data-type="info" data-subtype="string" data-cmd_id="#precipid#">#precip#</span>
+        <span style="margin-left: 4px;font-size: 0.8em;" class="cmd noRefresh" data-type="info" data-subtype="string" data-cmd_id="#neigeid#">#neige#</span>
+        <span style="margin-left: 4px;font-size: 0.8em;" class="cmd noRefresh" data-type="info" data-subtype="string" data-cmd_id="#uvid#">UV: #uv#</span>
+        
+      </div>
+      <div class="pull-left" style="margin-top: 0px;">
+        <span style="margin-left: 4px;font-size: 0.8em;" class="cmd noRefresh" data-type="info" data-subtype="string" data-cmd_id="#temperatureid#"><i class="fas fa-thermometer-three-quarters"></i> #temperature#°C (ressentie #feels_like#°C)</span>
+        <span style="margin-left: 4px;font-size: 0.8em;" class="cmd noRefresh" data-type="info" data-subtype="string" data-cmd_id="#humidityid#" title="Humidité"><i class="fas fa-tint"></i> #humidity#%</span>
+        <span style="margin-left: 4px;font-size: 0.8em;" class="cmd noRefresh" data-type="info" data-subtype="string" data-cmd_id="#dewPointid#" title="Point de rosée">Rosée: #dewPoint#°C</span>
+      </div>
+      <div class="pull-left" style="margin-top: 0px;">
+        <span style="margin-left: 4px;font-size: 0.8em;" class="cmd noRefresh" data-type="info" data-subtype="string" data-cmd_id="#pressureid#">Pression: #pressure#hPa</span>
+      </div>
+      <div class="pull-left" style="margin-top: 0px;">
+        <span style="margin-left: 4px;font-size: 0.8em;" class="cmd noRefresh" data-type="info" data-subtype="string" data-cmd_id="#visibilityid#">Visibilité: #visibility#</span>
+        <span class="cmd noRefresh" data-type="info" data-subtype="string" data-cmd_id="#sunid#" style="font-size: 0.8em;position: relative;left:4px;"><i class="fas fa-sun"></i> #sunrise# | #sunset#</span>
+      </div>
+    </span>
+  </div>
+  <div style="position : relative">
+    #forecast1h#
+    #forecast3h#
+    #forecastDaily#
+    #rainForecast#
+    #alerts#
+    #aqi#
+    <span style="margin-left: 4px;font-size: 0.8em;" class="cmd noRefresh" data-type="info" data-subtype="string" data-cmd_id="#visibilityid#">Mise à jour: #dateMaj# OpenWeather: #dateMajOW#</span>
+  </div>
+  <link rel="stylesheet" type="text/css" href="plugins/jptyWeather/desktop/weather-icons/css/weather-icons.min.css" />
+  <style>
+    .aqiGeneral {
+      display: table-cell;
+      border-style: solid;
+      border-width: 0px;
+      border-color: #ffffff;
+      vertical-align: middle;
+      align: center;
+      border-radius:12px;
+      width:24px;
+      height:24px;
+      cursor:default;
+      font-size: 1.5em;
+      font-weight: bold;
+    } 
+    #wDesc1, #wDesc2, #wDesc3 {
+      background-color: var(--al-info-color)!important;
+      text-align: center;
+    }
+  </style>
+  <script>
+		if ('#refresh_id#' != ''){
+			$('.eqLogic[data-eqLogic_uid=#uid#] .refresh').on('click', function () {
+				jeedom.cmd.execute({id: '#refresh_id#'});
+			});
+		}else{
+			$('.eqLogic[data-eqLogic_uid=#uid#] .refresh').remove();
+		}
+	</script>
+</div>
