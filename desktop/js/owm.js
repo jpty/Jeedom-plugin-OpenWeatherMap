@@ -21,6 +21,11 @@
     });
 });
 
+$('#btnSearchCity').on('click', function () {
+    $('#md_modal').dialog({title: "{{Trouver la ville}}"});
+    $('#md_modal').load('index.php?v=d&plugin=owm&modal=searchCity').dialog('open');
+});
+
 function getTxtType(_type) {
   switch (_type) {
     case 'info': return('Info');
