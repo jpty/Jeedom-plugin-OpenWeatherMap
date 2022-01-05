@@ -1,7 +1,7 @@
 [
-  {"sender_name":"METEO-FRANCE","OWtxt":"Moderate avalanches warning","TradFr":"Risque modéré: Avalanches","Level":"var(--lb-yellow-color)","Icon":"wi-snow"},
-  {"sender_name":"METEO-FRANCE","OWtxt":"Severe avalanches warning","TradFr":"Avalanches","Level":"var(--al-warning-color)","Icon":"wi-snow"},
-  {"sender_name":"METEO-FRANCE","OWtxt":"Extreme avalanches warning","TradFr":"Avalanches","Level":"var(--lb-danger-color)","Icon":"wi-snow"},
+  {"sender_name":"METEO-FRANCE","OWtxt":"Moderate avalanches warning","TradFr":"Risque modéré: Avalanches","Level":"var(--lb-yellow-color)","Icon":"wi-snowflake-cold"},
+  {"sender_name":"METEO-FRANCE","OWtxt":"Severe avalanches warning","TradFr":"Avalanches","Level":"var(--al-warning-color)","Icon":"wi-snowflake-cold"},
+  {"sender_name":"METEO-FRANCE","OWtxt":"Extreme avalanches warning","TradFr":"Avalanches","Level":"var(--lb-danger-color)","Icon":"wi-snowflake-cold"},
 
   {"sender_name":"METEO-FRANCE","OWtxt":"Moderate thunderstorm warning","TradFr":"Risque modéré: Orages","Level":"var(--lb-yellow-color)","Icon":"wi-lightning"},
   {"sender_name":"METEO-FRANCE","OWtxt":"Severe thunderstorm warning","TradFr":"Orages","Level":"var(--al-warning-color)","Icon":"wi-lightning"},

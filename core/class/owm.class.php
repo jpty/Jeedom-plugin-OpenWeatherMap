@@ -130,6 +130,7 @@ class owm extends eqLogic {
     }
     // message::add(__CLASS__, count($lines));
     $fcontent = implode('',$lines);
+    unset($lines);
     $pos1 = strpos($fcontent,'{"id": '.$cityID .',');
     if($pos1 !== false) {
       $pos2 = strpos($fcontent,'}}',$pos1);
@@ -147,37 +148,14 @@ class owm extends eqLogic {
           $this->setConfiguration('country',$dec['country']);
             log::add(__CLASS__,'debug',"Found Lat: " .$dec['coord']['lat']
               ." Lon: " .$dec['coord']['lon'] ." Name: " .$dec['name']);
+          unset($dec);
         }
       }
       else log::add(__CLASS__,'debug',"City $cityID not found. 2");
     }
     else log::add(__CLASS__,'debug',"City $cityID not found. 1");
-    
-    /*
-    // $fileName= __DIR__ ."/../../data/city.list.min.json";
-    // $fcontent= file_get_contents($fileName);
-    // if($fcontent !== false) {
-    $dec = json_decode($fcontent,true);
-    if($dec == null) {
-      message::add(__CLASS__,"Unable to decode json file $fileName. Taille:".strlen($fcontent) ." Err: " .json_last_error_msg()); 
-    }
-    else {
-      $nb = count($dec);
-      for($i=0;$i< $nb;$i++) {
-        if($dec[$i]['id'] == $cityID ) {
-          $this->setConfiguration('latitude',$dec[$i]['coord']['lat']);
-          $this->setConfiguration('longitude',$dec[$i]['coord']['lon']);
-          $this->setConfiguration('cityName',$dec[$i]['name']);
-          $this->setConfiguration('country',$dec[$i]['country']);
-          log::add(__CLASS__,'debug',"Found Lat: " .$dec[$i]['coord']['lat']
-            ." Lon: " .$dec[$i]['coord']['lon']
-            ." Name: " .$dec[$i]['name']);
-          break;
-        }
-      }
-    }
-    message::add(__CLASS__,"2 Mem used: " .memory_get_usage(false));  
-     */
+    unset($fcontent);
+    // message::add(__CLASS__, "Mem used: " .memory_get_usage(false));
   }
 
   public function postUpdate() {
@@ -643,7 +621,7 @@ class owm extends eqLogic {
     if(is_object($clouds)) {
       $val = $clouds->execCmd();
       if($val == 0) $val = '';
-      else $val =  'Nuages: ' .$val .'%';
+      else $val =  '<i class="wi wi-cloud"></i> ' .$val .'%';
       $replace['#cloudsid#'] = $clouds->getId();
       $replace['#clouds#'] = $val;
     }
@@ -777,19 +755,19 @@ class owm extends eqLogic {
             $img = self::getIconFromCondition($condition,$ts,$sun['sunrise'],$sun['sunset'],$wiIcon);
             $weatherDesc = $replace1h['#weatherDescription#'];
             if ($this->getConfiguration('wi_icons',0)==1) {
-              $replace1h['#icone#'] = "<div title=\"$weatherDesc\" style=\"text-align:center;margin-top:15px;\"><i class=\"wi $wiIcon\" style=\"font-size: 24px;width: 50px; height: 30px;\"></i></div>";
+              $replace1h['#icone#'] = "<div title=\"$weatherDesc\" style=\"text-align:center;margin-top:15px;\"><i class=\"wi $wiIcon\" style=\"font-size: 24px;width: 48px; height: 30px;\"></i></div>";
             }
             else if ($this->getConfiguration('owm_images',0)==1) {
-              $replace1h['#icone#'] = "<div title=\"$weatherDesc\" style=\"background: url('plugins/".__CLASS__."/core/template/images/".$icon."@2x.png') no-repeat center; background-size: 100% 100%; width: 50px; height: 50px;\"></div>";
+              $replace1h['#icone#'] = "<div title=\"$weatherDesc\" style=\"background: url('plugins/".__CLASS__."/core/template/images/".$icon."@2x.png') no-repeat center; background-size: 100% 100%; width: 48px; height: 48px;\"></div>";
             }
             else { // internal images
-              $replace1h['#icone#'] = "<div title=\"$weatherDesc\" style=\"background: url('plugins/".__CLASS__."/core/template/images/".$img.".png') no-repeat center; background-size: 100% 100%; width: 50px; height: 50px;\"></div>";
+              $replace1h['#icone#'] = "<div title=\"$weatherDesc\" style=\"background: url('plugins/".__CLASS__."/core/template/images/".$img.".png') no-repeat center; background-size: 100% 100%; width: 48px; height: 48px;\"></div>";
             }
             $replace['#forecast1h#'] .= template_replace($replace1h, $forecastHourly_template);
           }
           if($nbprev3h) $txt1h = "&nbsp;Prévisions 1h";
           if(strlen($replace['#forecast1h#']))
-            $replace['#forecast1h#'] = "<div  style=\"overflow-x: scroll; width: 100%; min-height: 15px; max-height: 200px; margin-top: 1px; font-size: 14px; text-align: left; scrollbar-width: thin;\">$txt1h<div style=\"width: " .(2850/48*$i) ."px;\">" .$replace['#forecast1h#'] ."</div></div>\n";
+            $replace['#forecast1h#'] = "<div  style=\"overflow-x: scroll; width: 100%; min-height: 15px; max-height: 200px; margin-top: 1px; font-size: 14px; text-align: left; scrollbar-width: thin;\">$txt1h<div style=\"width: " .(2740/48*$i) ."px;\">" .$replace['#forecast1h#'] ."</div></div>\n";
         }
       }
       else $replace['#forecast1h#'] ='forecast_1h_json Cmd not found. Equipment should be re-saved';
@@ -806,7 +784,7 @@ class owm extends eqLogic {
         $decAll = json_decode($json->execCmd(),true);
         if($decAll == null) {
           $replace['#forecast3h#'] ='Prévisions 3h non disponibles';
-          // log::add(__CLASS__, 'error', __FILE__ ." Line: " .__LINE__ ." Json_decode error : " .json_last_error_msg());
+          log::add(__CLASS__, 'error', __FILE__ ." Line: " .__LINE__ ." Json_decode error : " .json_last_error_msg());
         }
         else {
           if (file_exists( __DIR__ ."/../template/$_version/custom.forecast3Hours.html"))
@@ -868,19 +846,19 @@ class owm extends eqLogic {
             $img = self::getIconFromCondition($condition,$ts,$sun['sunrise'],$sun['sunset'],$wiIcon);
             $weatherDesc = $replace3h['#weatherDescription#'];
             if ($this->getConfiguration('wi_icons',0)==1) {
-              $replace3h['#icone#'] = "<div title=\"$weatherDesc\" style=\"text-align:center;margin-top:15px;\"><i class=\"wi $wiIcon\" style=\"font-size: 24px;width: 50px; height: 30px;\"></i></div>";
+              $replace3h['#icone#'] = "<div title=\"$weatherDesc\" style=\"text-align:center;margin-top:15px;\"><i class=\"wi $wiIcon\" style=\"font-size: 24px;width: 48px; height: 30px;\"></i></div>";
             }
             else if ($this->getConfiguration('owm_images',0)==1) {
-              $replace3h['#icone#'] = "<div title=\"$weatherDesc\" style=\"background: url('plugins/".__CLASS__."/core/template/images/".$icon."@2x.png') no-repeat center; background-size: 100% 100%; width: 50px; height: 50px;\"></div>";
+              $replace3h['#icone#'] = "<div title=\"$weatherDesc\" style=\"background: url('plugins/".__CLASS__."/core/template/images/".$icon."@2x.png') no-repeat center; background-size: 100% 100%; width: 48px; height: 48px;\"></div>";
             }
             else { // internal images
-              $replace3h['#icone#'] = "<div title=\"$weatherDesc\" style=\"background: url('plugins/".__CLASS__."/core/template/images/".$img.".png') no-repeat center; background-size: 100% 100%; width: 50px; height: 50px;\"></div>";
+              $replace3h['#icone#'] = "<div title=\"$weatherDesc\" style=\"background: url('plugins/".__CLASS__."/core/template/images/".$img.".png') no-repeat center; background-size: 100% 100%; width: 48px; height: 48px;\"></div>";
             }
             $replace['#forecast3h#'] .= template_replace($replace3h, $forecastHourly_template);
           }
           if($nbprev1h) $txt3h = "&nbsp;Prévisions 3h"; // Titre 3h si prev1h affichées
           if(strlen($replace['#forecast3h#']))
-            $replace['#forecast3h#'] = "<div  style=\"overflow-x: scroll; width: 100%; min-height: 15px; max-height: 200px; margin-top: 5px; font-size: 14px; text-align: left; scrollbar-width: thin;\">$txt3h<div style=\"width: " .(2800/40*$i) ."px;\">" .$replace['#forecast3h#'] ."</div></div>\n";
+            $replace['#forecast3h#'] = "<div  style=\"overflow-x: scroll; width: 100%; min-height: 15px; max-height: 200px; margin-top: 5px; font-size: 14px; text-align: left; scrollbar-width: thin;\">$txt3h<div style=\"width: " .(2300/40*$i) ."px;\">" .$replace['#forecast3h#'] ."</div></div>\n";
         }
       }
       else $replace['#forecast3h#'] ='forecast_3h_json Cmd not found. Equipment should be re-saved';
@@ -955,13 +933,13 @@ class owm extends eqLogic {
             $img = self::getIconFromCondition($condition,$ts,$dec['sunrise'],$dec['sunset'],$wiIcon);
             $weatherDesc = $replaceDay['#weatherDescription#'];
             if ($this->getConfiguration('wi_icons',0)==1) {
-              $replaceDay['#icone#'] = "<div title=\"$weatherDesc\" style=\"text-align:center;margin-top:15px;\"><i class=\"wi $wiIcon\" style=\"font-size: 24px;width: 50px; height: 30px;\"></i></div>";
+              $replaceDay['#icone#'] = "<div title=\"$weatherDesc\" style=\"text-align:center;margin-top:15px;\"><i class=\"wi $wiIcon\" style=\"font-size: 24px;width: 48px; height: 30px;\"></i></div>";
             }
             else if ($this->getConfiguration('owm_images',0)==1) {
-              $replaceDay['#icone#'] = "<div title=\"$weatherDesc\" style=\"background: url('plugins/".__CLASS__."/core/template/images/".$icon."@2x.png') no-repeat center; background-size: 100% 100%; width: 50px; height: 50px;\"></div>";
+              $replaceDay['#icone#'] = "<div title=\"$weatherDesc\" style=\"background: url('plugins/".__CLASS__."/core/template/images/".$icon."@2x.png') no-repeat center; background-size: 100% 100%; width: 48px; height: 48px;\"></div>";
             }
             else { // internal images
-              $replaceDay['#icone#'] = "<div title=\"$weatherDesc\" style=\"background: url('plugins/".__CLASS__."/core/template/images/".$img.".png') no-repeat center; background-size: 100% 100%; width: 50px; height: 50px;\"></div>";
+              $replaceDay['#icone#'] = "<div title=\"$weatherDesc\" style=\"background: url('plugins/".__CLASS__."/core/template/images/".$img.".png') no-repeat center; background-size: 100% 100%; width: 48px; height: 48px;\"></div>";
             }
             $replace['#forecastDaily#'] .= template_replace($replaceDay, $forecastDaily_template);
           }
@@ -1053,11 +1031,11 @@ class owm extends eqLogic {
             if(strlen($fcontent)) {
               $known = json_decode($fcontent,true);
               if($known == null) {
-                log::add(__CLASS__,'debug',"Unable to decode file: $fileName Size:".strlen($fcontent) ." Err: " .json_last_error_msg()); 
+                log::add(__CLASS__,'warning',"Unable to decode file: $fileName Size:".strlen($fcontent) ." Err: " .json_last_error_msg()); 
               }
             }
           }
-          else log::add(__CLASS__,'debug',"Unable to read file: $fileName"); 
+          else log::add(__CLASS__,'warning',"Unable to read file: $fileName"); 
           for($j=0;$j<$nbalert;$j++) {
             $found = -1;
             for($i=0;$i<count($known);$i++) {
@@ -1078,15 +1056,14 @@ log::add(__CLASS__,'debug', "$j Add [" .$alert[$j]['event'] ."] Count known: " .
               else log::add(__CLASS__,'error',"Unable to write $fileName file."); 
             }
             else {
-              if($txtAlert == '') $txtAlert = '<b>Source alertes météo </b>: '.$alert[$j]['sender_name'] .'<table style="width: 100%"><tr>';
-              // $txtAlert .= "<td>";
-              $txtAlert .= "<td style=\"text-align: center\" title=\"" .$known[$found]['TradFr'] . "<br/>Du " .strftime('%A %e %b %H:%M',$alert[$j]['start'])
-                ." au " .strftime('%A %e %b %H:%M',$alert[$j]['end']) ."\">";
-              $txtAlert .= "<i class=\"wi " .$known[$found]['Icon'] ."\" style=\"font-size: 24px; color:" .$known[$found]['Level'] ."\"></i>";
-              $txtAlert .= "</td>";
+              if($txtAlert == '') $txtAlert = '<table style="width: 100%"><tr><td><b>Source alertes météo:</b> '.$alert[$j]['sender_name'] .' ';
+              $txtAlert .= "<span title=\"" .$known[$found]['TradFr'] . "<br/>Du " .strftime('%A %e %b %H:%M',$alert[$j]['start'])
+                ." au " .strftime('%A %e %b %H:%M',$alert[$j]['end']) ."\"> ";
+              $txtAlert .= "&nbsp; <i class=\"wi " .$known[$found]['Icon'] ."\" style=\"font-size: 24px; color:" .$known[$found]['Level'] ."\"></i>";
+              $txtAlert .= "</span>";
             }
           }
-          if($txtAlert != '') $txtAlert .= '</tr></table>';
+          if($txtAlert != '') $txtAlert .= '</td></tr></table>';
         }
       }
       else $txtAlert = "txtAlerts_json Cmd not found. Equipment should be re-saved";
@@ -1192,7 +1169,7 @@ log::add(__CLASS__,'debug', "$j Add [" .$alert[$j]['event'] ."] Count known: " .
     $changed = $this->checkAndUpdateCmd('location', $cityName) || $changed;
       // Nouvelle API Onecall. Description voir https://openweathermap.org/api/one-call-api
     $url="https://api.openweathermap.org/data/2.5/onecall?lat=$lat&lon=$lon&units=metric&appid=$apiKey&lang=$lang"; // &exclude=current";
-    log::add(__CLASS__,'debug',"Fetch URL: $url");
+    // log::add(__CLASS__,'debug',"Fetch URL: $url");
     $content = $this->fetchOpenweather($url);
     if($content == null) return;
       // TODO de/commenter les 2 lignes
@@ -1342,9 +1319,10 @@ log::add(__CLASS__,'debug', "$j Add [" .$alert[$j]['event'] ."] Count known: " .
     }
 
       // Recup previsions meteo 3 heures en json
-    $cnt = $this->getConfiguration('nbprev3h', 0);
+    $cnt = $this->getConfiguration('forecast3h', 0);
+    // message::add(__CLASS__, "Cnt: $cnt");
     if ($cnt > 0) {
-      $url = "http://api.openweathermap.org/data/2.5/forecast?id=$cityID&appid=$apiKey&units=metric&lang=$lang&cnt=$cnt";
+      $url = "http://api.openweathermap.org/data/2.5/forecast?id=$cityID&appid=$apiKey&units=metric&lang=$lang";
       // $url = "http://api.openweathermap.org/data/2.5/forecast?appid=$apiKey&units=metric&lang=$lang&cnt=$cnt&lat=$lat&lon=$lon";
       // message::add(__CLASS__, "URL: $url");
       $content = $this->fetchOpenweather($url);

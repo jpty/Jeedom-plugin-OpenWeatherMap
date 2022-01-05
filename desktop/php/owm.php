@@ -96,10 +96,15 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-sm-3 control-label">{{ID ville OpenWeather à rechercher <a target=_blank href="https://openweathermap.org/find?q=">ICI</a><br/>et à récupérer dans l'URL de la ville choisie.</label>
+							<label class="col-sm-3 control-label">{{ID ville OpenWeather à rechercher <a target=_blank href="https://openweathermap.org/find?q=">ICI</a><br/>et à récupérer dans l'URL de la ville choisie.}}</label>
 							<div class="col-sm-3">
                 <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="cityID" />
+              </div>
+<!--
+              <div class="col-sm-3">
+                <a class="btn btn-default" id='btnSearchCity'><i class="fas fa-search"></i> {{Trouver la ville}}</a>
 							</div>
+-->
 						</div>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">{{Latitude}}</label>
