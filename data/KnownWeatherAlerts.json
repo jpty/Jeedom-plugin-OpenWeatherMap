@@ -1,34 +1,34 @@
 [
-  {"sender_name":"METEO-FRANCE","OWtxt":"Moderate avalanches warning","TradFr":"Risque modéré: Avalanches","Level":"var(--lb-yellow-color)","Icon":"wi-snowflake-cold"},
-  {"sender_name":"METEO-FRANCE","OWtxt":"Severe avalanches warning","TradFr":"Avalanches","Level":"var(--al-warning-color)","Icon":"wi-snowflake-cold"},
-  {"sender_name":"METEO-FRANCE","OWtxt":"Extreme avalanches warning","TradFr":"Avalanches","Level":"var(--lb-danger-color)","Icon":"wi-snowflake-cold"},
+  {"sender_name":"METEO-FRANCE","OWtxt":"Moderate avalanches warning","TradFr":"Risque jaune: Avalanches","Level":"var(--lb-yellow-color)","Icon":"wi-snowflake-cold"},
+  {"sender_name":"METEO-FRANCE","OWtxt":"Severe avalanches warning","TradFr":"Risque orange: Avalanches","Level":"var(--al-warning-color)","Icon":"wi-snowflake-cold"},
+  {"sender_name":"METEO-FRANCE","OWtxt":"Extreme avalanches warning","TradFr":"Risque rouge: Avalanches","Level":"var(--al-danger-color)","Icon":"wi-snowflake-cold"},
 
-  {"sender_name":"METEO-FRANCE","OWtxt":"Moderate thunderstorm warning","TradFr":"Risque modéré: Orages","Level":"var(--lb-yellow-color)","Icon":"wi-lightning"},
-  {"sender_name":"METEO-FRANCE","OWtxt":"Severe thunderstorm warning","TradFr":"Orages","Level":"var(--al-warning-color)","Icon":"wi-lightning"},
-  {"sender_name":"METEO-FRANCE","OWtxt":"Extreme thunderstorm warning","TradFr":"Orages","Level":"var(--lb-danger-color)","Icon":"wi-lightning"},
+  {"sender_name":"METEO-FRANCE","OWtxt":"Moderate thunderstorm warning","TradFr":"Risque jaune: Orages","Level":"var(--lb-yellow-color)","Icon":"wi-lightning"},
+  {"sender_name":"METEO-FRANCE","OWtxt":"Severe thunderstorm warning","TradFr":"Risque orange: Orages","Level":"var(--al-warning-color)","Icon":"wi-lightning"},
+  {"sender_name":"METEO-FRANCE","OWtxt":"Extreme thunderstorm warning","TradFr":"Risque rouge: Orages","Level":"var(--al-danger-color)","Icon":"wi-lightning"},
 
-  {"sender_name":"METEO-FRANCE","OWtxt":"Moderate snow-ice warning","TradFr":"Risque modéré: Neige, verglas","Level":"var(--lb-yellow-color)","Icon":"wi-snow"},
-  {"sender_name":"METEO-FRANCE","OWtxt":"Severe snow-ice warning","TradFr":"Neige, verglas","Level":"var(--al-warning-color)","Icon":"wi-snow"},
-  {"sender_name":"METEO-FRANCE","OWtxt":"Extreme snow-ice warning","TradFr":"Neige, verglas","Level":"var(--lb-danger-color)","Icon":"wi-snow"},
+  {"sender_name":"METEO-FRANCE","OWtxt":"Moderate snow-ice warning","TradFr":"Risque jaune: Neige, verglas","Level":"var(--lb-yellow-color)","Icon":"wi-snow"},
+  {"sender_name":"METEO-FRANCE","OWtxt":"Severe snow-ice warning","TradFr":"Risque orange: Neige, verglas","Level":"var(--al-warning-color)","Icon":"wi-snow"},
+  {"sender_name":"METEO-FRANCE","OWtxt":"Extreme snow-ice warning","TradFr":"Risque rouge: Neige, verglas","Level":"var(--al-danger-color)","Icon":"wi-snow"},
 
-  {"sender_name":"METEO-FRANCE","OWtxt":"Moderate wind warning","TradFr":"Risque modéré: Vent","Level":"var(--lb-yellow-color)","Icon":"wi-cloudy-gusts"},
-  {"sender_name":"METEO-FRANCE","OWtxt":"Severe wind warning","TradFr":"Vent","Level":"var(--al-warning-color)","Icon":"wi-cloudy-gusts"},
-  {"sender_name":"METEO-FRANCE","OWtxt":"Extreme wind warning","TradFr":"Vent","Level":"var(--lb-danger-color)","Icon":"wi-cloudy-gusts"},
+  {"sender_name":"METEO-FRANCE","OWtxt":"Moderate wind warning","TradFr":"Risque jaune: Vent","Level":"var(--lb-yellow-color)","Icon":"wi-cloudy-gusts"},
+  {"sender_name":"METEO-FRANCE","OWtxt":"Severe wind warning","TradFr":"Risque orange: Vent","Level":"var(--al-warning-color)","Icon":"wi-cloudy-gusts"},
+  {"sender_name":"METEO-FRANCE","OWtxt":"Extreme wind warning","TradFr":"Risque rouge: Vent","Level":"var(--al-danger-color)","Icon":"wi-cloudy-gusts"},
 
-  {"sender_name":"METEO-FRANCE","OWtxt":"Moderate rain-flood warning","TradFr":"Risque modéré: Pluie-inondation","Level":"var(--lb-yellow-color)","Icon":"wi-raindrops"},
-  {"sender_name":"METEO-FRANCE","OWtxt":"Severe rain-flood warning","TradFr":"Pluie inondation","Level":"var(--al-warning-color)","Icon":"wi-raindrops"},
-  {"sender_name":"METEO-FRANCE","OWtxt":"Extreme rain-flood warning","TradFr":"Pluie-inondation","Level":"var(--lb-danger-color)","Icon":"wi-raindrops"},
+  {"sender_name":"METEO-FRANCE","OWtxt":"Moderate rain-flood warning","TradFr":"Risque jaune: Pluie-inondation","Level":"var(--lb-yellow-color)","Icon":"wi-raindrops"},
+  {"sender_name":"METEO-FRANCE","OWtxt":"Severe rain-flood warning","TradFr":"Risque orange: Pluie inondation","Level":"var(--al-warning-color)","Icon":"wi-raindrops"},
+  {"sender_name":"METEO-FRANCE","OWtxt":"Extreme rain-flood warning","TradFr":"Risque rouge: Pluie-inondation","Level":"var(--al-danger-color)","Icon":"wi-raindrops"},
 
-  {"sender_name":"METEO-FRANCE","OWtxt":"Moderate coastalevent warning","TradFr":"Risque modéré: Vagues-submersion","Level":"var(--lb-yellow-color)","Icon":"wi-tsunami"},
-  {"sender_name":"METEO-FRANCE","OWtxt":"Severe coastalevent warning","TradFr":"Vagues-submersion","Level":"var(--al-warning-color)","Icon":"wi-tsunami"},
-  {"sender_name":"METEO-FRANCE","OWtxt":"Extreme coastalevent warning","TradFr":"Vagues-submersion","Level":"var(--lb-danger-color)","Icon":"wi-tsunami"},
+  {"sender_name":"METEO-FRANCE","OWtxt":"Moderate coastalevent warning","TradFr":"Risque jaune: Vagues-submersion","Level":"var(--lb-yellow-color)","Icon":"wi-tsunami"},
+  {"sender_name":"METEO-FRANCE","OWtxt":"Severe coastalevent warning","TradFr":"Risque orange: Vagues-submersion","Level":"var(--al-warning-color)","Icon":"wi-tsunami"},
+  {"sender_name":"METEO-FRANCE","OWtxt":"Extreme coastalevent warning","TradFr":"Risque rouge: Vagues-submersion","Level":"var(--al-danger-color)","Icon":"wi-tsunami"},
 
-  {"sender_name":"METEO-FRANCE","OWtxt":"Moderate flooding warning","TradFr":"Risque modéré: Crues","Level":"var(--lb-yellow-color)","Icon":"wi-flood"},
-  {"sender_name":"METEO-FRANCE","OWtxt":"Severe flooding warning","TradFr":"Crues","Level":"var(--al-warning-color)","Icon":"wi-flood"},
-  {"sender_name":"METEO-FRANCE","OWtxt":"Extreme flooding warning","TradFr":"Crues","Level":"var(--lb-danger-color)","Icon":"wi-flood"},
+  {"sender_name":"METEO-FRANCE","OWtxt":"Moderate flooding warning","TradFr":"Risque jaune: Crues","Level":"var(--lb-yellow-color)","Icon":"wi-flood"},
+  {"sender_name":"METEO-FRANCE","OWtxt":"Severe flooding warning","TradFr":"Risque orange: Crues","Level":"var(--al-warning-color)","Icon":"wi-flood"},
+  {"sender_name":"METEO-FRANCE","OWtxt":"Extreme flooding warning","TradFr":"Risque rouge: Crues","Level":"var(--al-danger-color)","Icon":"wi-flood"},
   
-  {"sender_name":"METEO-FRANCE","OWtxt":"Moderate high-temperature warning","TradFr":"Risque modéré: Canicule","Level":"var(--lb-yellow-color)","Icon":"wi-thermometer"},
-  {"sender_name":"METEO-FRANCE","OWtxt":"Severe high-temperature warning","TradFr":"Canicule","Level":"var(--al-warning-color)","Icon":"wi-thermometer"},
-  {"sender_name":"METEO-FRANCE","OWtxt":"Extreme high-temperature warning","TradFr":"Canicule","Level":"var(--lb-danger-color)","Icon":"wi-thermometer"}
+  {"sender_name":"METEO-FRANCE","OWtxt":"Moderate high-temperature warning","TradFr":"Risque jaune: Canicule","Level":"var(--lb-yellow-color)","Icon":"wi-thermometer"},
+  {"sender_name":"METEO-FRANCE","OWtxt":"Severe high-temperature warning","TradFr":"Risque orange: Canicule","Level":"var(--al-warning-color)","Icon":"wi-thermometer"},
+  {"sender_name":"METEO-FRANCE","OWtxt":"Extreme high-temperature warning","TradFr":"Risque rouge: Canicule","Level":"var(--al-danger-color)","Icon":"wi-thermometer"}
 ]
 
