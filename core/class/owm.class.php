@@ -329,6 +329,30 @@ class owm extends eqLogic {
       $owmCmd->save();
     }
 
+    $owmCmd = $this->getCmd(null, 'dayLength');
+    if (!is_object($owmCmd)) {
+      $owmCmd = new owmCmd();
+      $owmCmd->setName(__('Durée du jour', __FILE__));
+      $owmCmd->setLogicalId('dayLength');
+      $owmCmd->setEqLogic_id($this->getId());
+      $owmCmd->setUnite('');
+      $owmCmd->setType('info');
+      $owmCmd->setSubType('numeric');
+      $owmCmd->save();
+    }
+
+    $owmCmd = $this->getCmd(null, 'dayLengthVariation');
+    if (!is_object($owmCmd)) {
+      $owmCmd = new owmCmd();
+      $owmCmd->setName(__('Variation durée du jour', __FILE__));
+      $owmCmd->setLogicalId('dayLengthVariation');
+      $owmCmd->setEqLogic_id($this->getId());
+      $owmCmd->setUnite('');
+      $owmCmd->setType('info');
+      $owmCmd->setSubType('numeric');
+      $owmCmd->save();
+    }
+
     $owmCmd = $this->getCmd(null, 'condition');
     if (!is_object($owmCmd)) {
       $owmCmd = new owmCmd();
@@ -640,7 +664,7 @@ class owm extends eqLogic {
     $replace['#winddir#'] = is_object($wind_direction) ? $this->convertDegrees2Compass($wind_direction->execCmd(),0) : '';
     $windGust = $this->getCmd(null, 'windGust');
     if(is_object($windGust)) $raf = $windGust->execCmd();
-    $replace['#windGust#'] = ($raf) ? (' &nbsp; '.$windGust->execCmd().'km/h &nbsp;') : '';
+    $replace['#windGust#'] = ($raf) ? (' &nbsp; '.$windGust->execCmd().'km/h &nbsp;') : '<br/>'; // br pour occuper la place
     $dewPoint = $this->getCmd(null, 'dewPoint');
     $replace['#dewPoint#'] = is_object($dewPoint) ? (round($dewPoint->execCmd(),1)) : '-';
     $replace['#dewPointid#'] = is_object($dewPoint) ? $dewPoint->getId() : '';
@@ -650,6 +674,13 @@ class owm extends eqLogic {
     $sunrise = $this->getCmd(null, 'sunrise');
     $sunrise_time = is_object($sunrise) ? $sunrise->execCmd() : 0;
     $replace['#sunrise#'] = date('G:i',$sunrise_time);
+    $dayLength = $this->getCmd(null, 'dayLength');
+    $TS = is_object($dayLength) ? $dayLength->execCmd() : 0;
+    $replace['#dayLengthid#'] = is_object($dayLength) ? $dayLength->getId() : '';
+    $replace['#dayLength#'] = gmdate('G\h i\m\i\n',$TS);
+    $dayLengthVariation = $this->getCmd(null, 'dayLengthVariation');
+    $TS = is_object($dayLengthVariation) ? $dayLengthVariation->execCmd() : 0;
+    $replace['#dayLengthVariation#'] = sprintf("%+ds",$TS);
     $replace['#sunid#'] = is_object($sunrise) ? $sunrise->getId() : '';
     $sunset = $this->getCmd(null, 'sunset');
     $sunset_time = is_object($sunset) ? $sunset->execCmd() : null;
@@ -1030,7 +1061,7 @@ class owm extends eqLogic {
           if($fcontent !== false) {
             if(strlen($fcontent)) {
               $known = json_decode($fcontent,true);
-              if($known == null) {
+              if($known === null) {
                 log::add(__CLASS__,'warning',"Unable to decode file: $fileName Size:".strlen($fcontent) ." Err: " .json_last_error_msg()); 
               }
             }
@@ -1199,6 +1230,13 @@ log::add(__CLASS__,'debug', "$j Add [" .$alert[$j]['event'] ."] Count known: " .
       $changed = $this->checkAndUpdateCmd('pressure', $dec["current"]["pressure"]) || $changed;
       $changed = $this->checkAndUpdateCmd('wind_speed', round($dec["current"]["wind_speed"] * 3.6),1) || $changed;
       $changed = $this->checkAndUpdateCmd('wind_direction', $dec["current"]["wind_deg"]) || $changed;
+      $t = time();
+      $today = date_sun_info($t,$lat,$lon);
+      $yesterday = date_sun_info($t-86400,$lat,$lon);
+      $dayLength = $today['sunset'] - $today['sunrise'];
+      $dayLengthHier = $yesterday['sunset'] - $yesterday['sunrise'];
+      $changed = $this->checkAndUpdateCmd('dayLength', $dayLength) || $changed;
+      $changed = $this->checkAndUpdateCmd('dayLengthVariation', $dayLength - $dayLengthHier) || $changed;
       $changed = $this->checkAndUpdateCmd('sunrise', $dec["current"]["sunrise"]) || $changed;
       $changed = $this->checkAndUpdateCmd('sunset', $dec["current"]["sunset"]) || $changed;
       $changed = $this->checkAndUpdateCmd('condition', ucfirst($dec["current"]["weather"][0]["description"])) || $changed;
@@ -1233,6 +1271,8 @@ log::add(__CLASS__,'debug', "$j Add [" .$alert[$j]['event'] ."] Count known: " .
       $changed = $this->checkAndUpdateCmd('wind_speed', 0) || $changed;
       $changed = $this->checkAndUpdateCmd('wind_direction', 0) || $changed;
       $changed = $this->checkAndUpdateCmd('sunrise', 0) || $changed;
+      $changed = $this->checkAndUpdateCmd('dayLength', 0) || $changed;
+      $changed = $this->checkAndUpdateCmd('dayLengthVariation', 0) || $changed;
       $changed = $this->checkAndUpdateCmd('sunset', 0) || $changed;
       $changed = $this->checkAndUpdateCmd('condition', '') || $changed;
       $changed = $this->checkAndUpdateCmd('condition_id', 0) || $changed;
@@ -1311,8 +1351,8 @@ log::add(__CLASS__,'debug', "$j Add [" .$alert[$j]['event'] ."] Count known: " .
           $changed = $this->checkAndUpdateCmd('aqi_json', json_encode($dec['list']));
         }
         else {
-          log::add(__CLASS__, 'debug', __FILE__ ." " .__LINE__ ." Json_decode error : " .json_last_error_msg());
-          log::add(__CLASS__, 'debug', "air quality " ." " .substr($content,0,50) ." ... " .substr($content,-50));
+          log::add(__CLASS__, 'warning', __FILE__ ." " .__LINE__ ." Json_decode : " .json_last_error_msg());
+          log::add(__CLASS__, 'debug', "Air quality returns: " .substr($content,0,50) ." ... " .substr($content,-50));
           $changed = $this->checkAndUpdateCmd('aqi_json', '[]') || $changed;
         }
       }
