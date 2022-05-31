@@ -1,6 +1,6 @@
 {
 	"id" : "owm",
-	"name" : "OpenWeatherMap",
+	"name" : "Open Weather Map",
 	"description" : "Ce plugin utilise l'API OneCall d'OpenweatherMap pour récupérer les informations météos utiles pour votre système domotique.",
 	"licence" : "AGPL",
 	"author" : "jpty",
