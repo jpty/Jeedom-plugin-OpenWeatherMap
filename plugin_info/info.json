@@ -9,5 +9,5 @@
         "changelog" : "https://jpty.github.io/jeedom/plugins/OpenWeatherMap/fr_FR/changelog.html",
      "documentation" : "https://jpty.github.io/jeedom/plugins/OpenWeatherMap/fr_FR/index.html",
 	"language" : ["fr_FR"],
-	"compatibility" : ["miniplus","smart","rpi","diy","mobile","v4","atlas"]
+	"compatibility" : ["miniplus","smart","rpi","diy","v4","atlas"]
 }
